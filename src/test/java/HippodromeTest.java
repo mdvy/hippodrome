@@ -1,38 +1,33 @@
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
 
+@ExtendWith(MockitoExtension.class)
 class HippodromeTest {
 
     @Test
-    void nullHorses() {
+    void nullHorsesTest() {
         assertThrows(IllegalArgumentException.class, () -> new Hippodrome(null));
     }
 
     @Test
-    void nullHorsesExcMessage() {
+    void nullHorsesExcMessageTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Hippodrome(null));
         assertEquals("Horses cannot be null.", exception.getMessage());
     }
 
     @Test
-    void emptyHorses() {
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Hippodrome(new ArrayList<Horse>()));
+    void emptyHorsesTest() {
+        assertThrows(IllegalArgumentException.class, () -> new Hippodrome(new ArrayList<>()));
     }
 
     @Test
-    void emptyHorsesExcMessage() {
-        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Hippodrome(new ArrayList<Horse>()));
+    void emptyHorsesExcMessageTest() {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Hippodrome(new ArrayList<>()));
         assertEquals("Horses cannot be empty.", exception.getMessage());
     }
 

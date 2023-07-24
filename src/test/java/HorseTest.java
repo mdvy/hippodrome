@@ -6,55 +6,53 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 
 @ExtendWith(MockitoExtension.class)
 class HorseTest {
 
     @Test
-    void nullHorseName() {
+    void nullHorseNameTest() {
         assertThrows(IllegalArgumentException.class, () -> new Horse(null, 1.0));
     }
 
     @Test
-    void nullHorseNameExcMessage() {
+    void nullHorseNameExcMessageTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse(null, 1.0));
         assertEquals("Name cannot be null.", exception.getMessage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {" ", "\t", "\n", "\s\s\s", "\r", "\f"})
-    void emptyHorseName(String name) {
+    void emptyHorseNameTest(String name) {
         assertThrows(IllegalArgumentException.class, () -> new Horse(name, 1.0));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {" ", "\t", "\n", "\s\s\s", "\r", "\f"})
-    void emptyHorseNameExcMessage(String name) {
+    void emptyHorseNameExcMessageTest(String name) {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse(name, 1.0));
         assertEquals("Name cannot be blank.", exception.getMessage());
     }
 
     @Test
-    void negativeSpeed() {
+    void negativeSpeedTest() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Horse("SomeName", -1.0));
     }
 
     @Test
-    void negativeSpeedExcMessage() {
+    void negativeSpeedExcMessageTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse("SomeName", -2.0));
         assertEquals("Speed cannot be negative.", exception.getMessage());
     }
 
     @Test
-    void negativeDistance() {
+    void negativeDistanceTest() {
         assertThrows(IllegalArgumentException.class, () -> new Horse("SomeName", 1.0, -1.0));
     }
 
     @Test
-    void negativeDistanceExcMessage() {
+    void negativeDistanceExcMessageTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Horse("SomeName", 1.0, -1.0));
         assertEquals("Distance cannot be negative.", exception.getMessage());
     }
